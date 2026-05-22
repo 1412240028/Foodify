@@ -1,13 +1,13 @@
 <?php
 
-$nama   = trim($_POST['nama'] ?? '');
-$email  = trim($_POST['email'] ?? '');
-$nohp   = trim($_POST['nohp'] ?? '');
+$nama = trim($_POST['nama'] ?? '');
+$email = trim($_POST['email'] ?? '');
+$nohp = trim($_POST['nohp'] ?? '');
 $alamat = trim($_POST['alamat'] ?? '');
-$jk     = $_POST['jk'] ?? '';
-$tgl    = $_POST['tgl'] ?? '';
-$bln    = $_POST['bln'] ?? '';
-$thn    = $_POST['thn'] ?? '';
+$jk = $_POST['jk'] ?? '';
+$tgl = $_POST['tgl'] ?? '';
+$bln = $_POST['bln'] ?? '';
+$thn = $_POST['thn'] ?? '';
 $setuju = isset($_POST['setuju']) ? $_POST['setuju'] : '';
 
 $errors = [];
@@ -36,7 +36,7 @@ if ($nohp != '' && !is_numeric($nohp)) {
     $errors[] = "Nomor HP harus berupa angka.";
 }
 
-if (!checkdate((int)$bln, (int)$tgl, (int)$thn)) {
+if (!checkdate((int) $bln, (int) $tgl, (int) $thn)) {
     $errors[] = "Tanggal lahir tidak valid.";
 }
 
@@ -45,63 +45,61 @@ if ($setuju == '') {
 }
 
 if (!empty($errors)) {
-?>
+    ?>
 
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <title>Pendaftaran Gagal - Foodify</title>
-</head>
+    <!DOCTYPE html>
+    <html lang="id">
 
-<body>
+    <head>
+        <meta charset="UTF-8">
+        <title>Pendaftaran Gagal - Foodify</title>
+    </head>
 
-    <table align="center" border="1" style="width:500px; padding:10px;">
-        <tr>
-            <th style="color:red; font-size:20px;">
-                &#10008; KONEKSI GAGAL
-            </th>
-        </tr>
-    </table>
+    <body>
 
-    <h2 align="center">
-        <u>PENDAFTARAN DIBATALKAN</u>
-    </h2>
+        <table align="center" border="1" style="width:500px; padding:10px;">
+            <tr>
+                <th style="color:red; font-size:20px;">
+                    &#10008; KONEKSI GAGAL
+                </th>
+            </tr>
+        </table>
 
-    <p align="center">
-        Formulir belum diisi dengan benar.
-        Mohon perbaiki kesalahan berikut:
-    </p>
+        <h2 align="center">
+            <u>PENDAFTARAN DIBATALKAN</u>
+        </h2>
 
-    <table align="center" cellpadding="5">
+        <p align="center">
+            Formulir belum diisi dengan benar.
+            Mohon perbaiki kesalahan berikut:
+        </p>
 
-    <?php foreach ($errors as $error): ?>
+        <table align="center" cellpadding="5">
 
-        <tr>
-            <td style="color:red;">&#10006;</td>
-            <td style="color:red;">
-                <?= htmlspecialchars($error) ?>
-            </td>
-        </tr>
+            <?php foreach ($errors as $error): ?>
 
-    <?php endforeach; ?>
+                <tr>
+                    <td style="color:red;">&#10006;</td>
+                    <td style="color:red;">
+                        <?= htmlspecialchars($error) ?>
+                    </td>
+                </tr>
 
-    </table>
+            <?php endforeach; ?>
 
-    <br>
+        </table>
 
-    <p align="center">
-        <input 
-            type="button" 
-            value="&#8592; Kembali ke Form"
-            onclick="history.back()"
-        >
-    </p>
+        <br>
 
-</body>
-</html>
+        <p align="center">
+            <input type="button" value="&#8592; Kembali ke Form" onclick="history.back()">
+        </p>
 
-<?php
+    </body>
+
+    </html>
+
+    <?php
     exit();
 }
 
@@ -110,6 +108,7 @@ $tanggal_daftar = strtoupper(date('d F Y'));
 
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <title>Pendaftaran Berhasil - Foodify</title>
@@ -169,12 +168,7 @@ $tanggal_daftar = strtoupper(date('d F Y'));
 
     </table>
 
-    <table 
-        align="center" 
-        border="1" 
-        cellpadding="8"
-        style="width:500px; margin-top:10px;"
-    >
+    <table align="center" border="1" cellpadding="8" style="width:500px; margin-top:10px;">
         <tr>
             <td align="center">
                 <i>
@@ -186,4 +180,5 @@ $tanggal_daftar = strtoupper(date('d F Y'));
     </table>
 
 </body>
+
 </html>
