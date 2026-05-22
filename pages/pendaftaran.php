@@ -6,7 +6,11 @@
 </head>
 <body bgcolor="lightyellow">
 
+<<<<<<< HEAD
+    <h2>PENDAFTARAN </h2>
+=======
     <h2>PENDAFTARAN MEMBER FOODIFY</h2>
+>>>>>>> 1d60c6d8fa6a37c1dd648f26bd905253ee9cfec5
     <hr>
     <p>Daftarkan diri kamu sebagai member Foodify dan nikmati berbagai keuntungan eksklusif!</p>
 

@@ -46,6 +46,22 @@ if (!empty($errors)) {
 </head>
 <body>
 
+<<<<<<< HEAD
+    <table align="center" border="1" style="width:500px; padding:10px;">
+        <tr>
+            <th style="color:red; font-size:20px;">&#10008; KONEKSI GAGAL</th>
+        </tr>
+    </table>
+
+    <h2 align="center"><u>PENDAFTARAN DIBATALKAN</u></h2>
+    <p align="center">Formulir belum diisi dengan benar. Mohon perbaiki kesalahan berikut:</p>
+
+    <ul align="center" style="list-style:none; text-align:center; padding:0;">
+        <?php foreach ($errors as $error): ?>
+            <li style="color:red;"><?= $error ?></li>
+        <?php endforeach; ?>
+    </ul>
+=======
     <h2 align="center"><u>PENDAFTARAN DIBATALKAN</u></h2>
     <p align="center">Formulir belum diisi dengan benar. Mohon perbaiki kesalahan berikut:</p>
 
@@ -57,6 +73,7 @@ if (!empty($errors)) {
       </tr>
     <?php endforeach; ?>
     </table>
+>>>>>>> 1d60c6d8fa6a37c1dd648f26bd905253ee9cfec5
 
     <br>
     <p align="center">
@@ -83,6 +100,15 @@ $tanggal_daftar = strtoupper(date('d F Y'));
 </head>
 <body>
 
+<<<<<<< HEAD
+    <table align="center" border="1" style="width:500px; padding:10px;">
+        <tr>
+            <th style="color:green; font-size:20px;">&#10004; KONEKSI BERHASIL</th>
+        </tr>
+    </table>
+
+=======
+>>>>>>> 1d60c6d8fa6a37c1dd648f26bd905253ee9cfec5
     <h2 align="center"><u>DATA MEMBER FOODIFY</u></h2>
 
     <table cellpadding="8" cellspacing="0" align="center">
