@@ -11,7 +11,7 @@ if (isset($_POST['tambah'])) {
               VALUES ('$nama_produk', '$kategori', '$harga', '$deskripsi')";
 
     if (mysqli_query($conn, $query)) {
-        echo "<script>alert('Produk berhasil ditambahkan'); window.location='products.php';</script>";
+        echo "<script>alert('Produk berhasil ditambahkan'); window.location='produk.php';</script>";
     } else {
         echo "<script>alert('Gagal menambahkan produk');</script>";
     }
@@ -32,7 +32,7 @@ if (isset($_POST['update'])) {
               WHERE id_produk = '$id_produk'";
 
     if (mysqli_query($conn, $query)) {
-        echo "<script>alert('Produk berhasil diubah'); window.location='products.php';</script>";
+        echo "<script>alert('Produk berhasil diubah'); window.location='produk.php';</script>";
     } else {
         echo "<script>alert('Gagal mengubah produk');</script>";
     }
@@ -44,7 +44,7 @@ if (isset($_GET['hapus'])) {
     $query = "DELETE FROM produk WHERE id_produk = '$id_produk'";
 
     if (mysqli_query($conn, $query)) {
-        echo "<script>alert('Produk berhasil dihapus'); window.location='products.php';</script>";
+        echo "<script>alert('Produk berhasil dihapus'); window.location='produk.php';</script>";
     } else {
         echo "<script>alert('Gagal menghapus produk');</script>";
     }
@@ -81,7 +81,7 @@ if (isset($_GET['edit'])) {
 
     <center>
         <a href="../index.html">Home</a> |
-        <a href="products.php">Produk</a> |
+        <a href="produk.php">Produk</a> |
         <a href="contact.html">Kontak</a>
     </center>
 
@@ -151,7 +151,7 @@ if (isset($_GET['edit'])) {
                     <td colspan="2" align="center">
                         <?php if ($edit_mode): ?>
                             <button type="submit" name="update">Update Produk</button>
-                            <a href="products.php">Batal</a>
+                            <a href="produk.php">Batal</a>
                         <?php else: ?>
                             <button type="submit" name="tambah">Tambah Produk</button>
                         <?php endif; ?>
@@ -190,9 +190,9 @@ if (isset($_GET['edit'])) {
                         <td>Rp <?php echo number_format($produk['harga'], 0, ',', '.'); ?></td>
                         <td><?php echo $produk['deskripsi']; ?></td>
                         <td align="center">
-                            <a href="products.php?edit=<?php echo $produk['id_produk']; ?>">Edit</a>
+                            <a href="produk.php?edit=<?php echo $produk['id_produk']; ?>">Edit</a>
                             |
-                            <a href="products.php?hapus=<?php echo $produk['id_produk']; ?>"
+                            <a href="produk.php?hapus=<?php echo $produk['id_produk']; ?>"
                                onclick="return confirm('Yakin ingin menghapus produk ini?')">
                                 Hapus
                             </a>
