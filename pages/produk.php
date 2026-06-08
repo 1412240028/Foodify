@@ -71,150 +71,144 @@ if (isset($_GET['edit'])) {
     <title>Produk - Foodify</title>
 </head>
 
-<body bgcolor="lightyellow">
+<body bgcolor="lightblue">
 
-    <center>
-        <h1>FOODIFY</h1>
-        <h3>Data Produk Makanan dan Minuman</h3>
-        <hr width="80%">
-    </center>
+    <h2>HALAMAN PRODUK</h2>
+    <hr />
 
-    <center>
-        <a href="../index.html">Home</a> |
-        <a href="produk.php">Produk</a> |
-        <a href="contact.html">Kontak</a>
-    </center>
+    <p>Selamat datang di <b>Foodify</b>!</p>
+    <p>
+        Berikut adalah daftar produk makanan dan minuman yang tersedia.
+        Pada halaman ini, pengguna dapat menambah, mengubah, dan menghapus data produk.
+    </p>
 
-    <br>
+    <hr />
 
-    <center>
-        <table border="1" cellpadding="10" cellspacing="0" width="80%" bgcolor="white">
-            <tr bgcolor="orange">
-                <th colspan="2">
-                    <?php echo $edit_mode ? "FORM EDIT PRODUK" : "FORM TAMBAH PRODUK"; ?>
-                </th>
+    <h3 align="center">
+        <?php echo $edit_mode ? "Form Edit Produk" : "Form Tambah Produk"; ?>
+    </h3>
+
+    <table border="1" width="700" align="center" cellpadding="5">
+        <form method="POST" action="">
+            <?php if ($edit_mode): ?>
+                <input type="hidden" name="id_produk" value="<?php echo $data_edit['id_produk']; ?>">
+            <?php endif; ?>
+
+            <tr>
+                <th width="180">Nama Produk</th>
+                <td>
+                    <input type="text" name="nama_produk" size="50" required
+                           value="<?php echo $edit_mode ? $data_edit['nama_produk'] : ''; ?>">
+                </td>
             </tr>
 
-            <form method="POST" action="">
-                <?php if ($edit_mode): ?>
-                    <input type="hidden" name="id_produk" value="<?php echo $data_edit['id_produk']; ?>">
-                <?php endif; ?>
-
-                <tr>
-                    <td>Nama Produk</td>
-                    <td>
-                        <input type="text" name="nama_produk" size="50" required
-                               value="<?php echo $edit_mode ? $data_edit['nama_produk'] : ''; ?>">
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>Kategori</td>
-                    <td>
-                        <select name="kategori" required>
-                            <option value="">-- Pilih Kategori --</option>
-
-                            <option value="Makanan"
-                                <?php echo ($edit_mode && $data_edit['kategori'] == 'Makanan') ? 'selected' : ''; ?>>
-                                Makanan
-                            </option>
-
-                            <option value="Minuman"
-                                <?php echo ($edit_mode && $data_edit['kategori'] == 'Minuman') ? 'selected' : ''; ?>>
-                                Minuman
-                            </option>
-
-                            <option value="Snack"
-                                <?php echo ($edit_mode && $data_edit['kategori'] == 'Snack') ? 'selected' : ''; ?>>
-                                Snack
-                            </option>
-                        </select>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>Harga</td>
-                    <td>
-                        <input type="number" name="harga" size="50" required
-                               value="<?php echo $edit_mode ? $data_edit['harga'] : ''; ?>">
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>Deskripsi</td>
-                    <td>
-                        <textarea name="deskripsi" rows="5" cols="52" required><?php echo $edit_mode ? $data_edit['deskripsi'] : ''; ?></textarea>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td colspan="2" align="center">
-                        <?php if ($edit_mode): ?>
-                            <button type="submit" name="update">Update Produk</button>
-                            <a href="produk.php">Batal</a>
-                        <?php else: ?>
-                            <button type="submit" name="tambah">Tambah Produk</button>
-                        <?php endif; ?>
-                    </td>
-                </tr>
-            </form>
-        </table>
-    </center>
-
-    <br><br>
-
-    <center>
-        <h2>DAFTAR PRODUK</h2>
-
-        <table border="1" cellpadding="8" cellspacing="0" width="90%" bgcolor="white">
-            <tr bgcolor="orange">
-                <th>No</th>
-                <th>Nama Produk</th>
+            <tr>
                 <th>Kategori</th>
-                <th>Harga</th>
-                <th>Deskripsi</th>
-                <th>Aksi</th>
+                <td>
+                    <select name="kategori" required>
+                        <option value="">-- Pilih Kategori --</option>
+
+                        <option value="Makanan Berat"
+                            <?php echo ($edit_mode && $data_edit['kategori'] == 'Makanan Berat') ? 'selected' : ''; ?>>
+                            Makanan Berat
+                        </option>
+
+                        <option value="Snack"
+                            <?php echo ($edit_mode && $data_edit['kategori'] == 'Snack') ? 'selected' : ''; ?>>
+                            Snack
+                        </option>
+
+                        <option value="Minuman"
+                            <?php echo ($edit_mode && $data_edit['kategori'] == 'Minuman') ? 'selected' : ''; ?>>
+                            Minuman
+                        </option>
+                    </select>
+                </td>
             </tr>
 
-            <?php
-            $no = 1;
-            $query_produk = mysqli_query($conn, "SELECT * FROM produk ORDER BY id_produk DESC");
+            <tr>
+                <th>Harga</th>
+                <td>
+                    <input type="number" name="harga" size="50" required
+                           value="<?php echo $edit_mode ? $data_edit['harga'] : ''; ?>">
+                </td>
+            </tr>
 
-            if (mysqli_num_rows($query_produk) > 0) {
-                while ($produk = mysqli_fetch_assoc($query_produk)) {
-            ?>
-                    <tr>
-                        <td align="center"><?php echo $no++; ?></td>
-                        <td><?php echo $produk['nama_produk']; ?></td>
-                        <td align="center"><?php echo $produk['kategori']; ?></td>
-                        <td>Rp <?php echo number_format($produk['harga'], 0, ',', '.'); ?></td>
-                        <td><?php echo $produk['deskripsi']; ?></td>
-                        <td align="center">
-                            <a href="produk.php?edit=<?php echo $produk['id_produk']; ?>">Edit</a>
-                            |
-                            <a href="produk.php?hapus=<?php echo $produk['id_produk']; ?>"
-                               onclick="return confirm('Yakin ingin menghapus produk ini?')">
-                                Hapus
-                            </a>
-                        </td>
-                    </tr>
-            <?php
-                }
-            } else {
-                echo "<tr>";
-                echo "<td colspan='6' align='center'>Belum ada data produk</td>";
-                echo "</tr>";
+            <tr>
+                <th>Deskripsi</th>
+                <td>
+                    <textarea name="deskripsi" rows="4" cols="52" required><?php echo $edit_mode ? $data_edit['deskripsi'] : ''; ?></textarea>
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="2" align="center">
+                    <?php if ($edit_mode): ?>
+                        <button type="submit" name="update">Update Produk</button>
+                        <a href="produk.php">Batal</a>
+                    <?php else: ?>
+                        <button type="submit" name="tambah">Tambah Produk</button>
+                    <?php endif; ?>
+                </td>
+            </tr>
+        </form>
+    </table>
+
+    <br />
+
+    <hr />
+
+    <h3 align="center">Daftar Produk</h3>
+
+    <table border="1" width="700" align="center" cellpadding="5">
+        <tr>
+            <th width="40">No</th>
+            <th>Nama Produk</th>
+            <th>Kategori</th>
+            <th>Harga</th>
+            <th>Deskripsi</th>
+            <th>Aksi</th>
+        </tr>
+
+        <?php
+        $no = 1;
+        $query_produk = mysqli_query($conn, "SELECT * FROM produk ORDER BY id_produk DESC");
+
+        if (mysqli_num_rows($query_produk) > 0) {
+            while ($produk = mysqli_fetch_assoc($query_produk)) {
+        ?>
+                <tr align="center">
+                    <td><?php echo $no++; ?></td>
+                    <td align="left"><b><?php echo $produk['nama_produk']; ?></b></td>
+                    <td><?php echo $produk['kategori']; ?></td>
+                    <td>Rp <?php echo number_format($produk['harga'], 0, ',', '.'); ?></td>
+                    <td align="left"><?php echo $produk['deskripsi']; ?></td>
+                    <td>
+                        <a href="produk.php?edit=<?php echo $produk['id_produk']; ?>">Edit</a>
+                        |
+                        <a href="produk.php?hapus=<?php echo $produk['id_produk']; ?>"
+                           onclick="return confirm('Yakin ingin menghapus produk ini?')">
+                            Hapus
+                        </a>
+                    </td>
+                </tr>
+        <?php
             }
-            ?>
-        </table>
-    </center>
+        } else {
+            echo "<tr>";
+            echo "<td colspan='6' align='center'>Belum ada data produk</td>";
+            echo "</tr>";
+        }
+        ?>
+    </table>
 
-    <br>
+    <br />
 
-    <center>
-        <hr width="80%">
-        <p>&copy; 2026 Foodify</p>
-    </center>
+    <p align="center">
+        <a href="kategori.html" target="konten">&larr; Kategori</a>
+        &nbsp;
+        <a href="profil.html" target="konten">Profil &rarr;</a>
+    </p>
 
 </body>
 </html>

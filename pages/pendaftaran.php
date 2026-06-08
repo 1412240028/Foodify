@@ -8,58 +8,57 @@
 
 <body bgcolor="lightyellow">
 
-    <h2>PENDAFTARAN MEMBER FOODIFY</h2>
+    <h2>HALAMAN PENDAFTARAN MEMBER</h2>
     <hr>
 
+    <p>Selamat datang di <b>Foodify</b>!</p>
     <p>
-        Daftarkan diri kamu sebagai member Foodify
-        dan nikmati berbagai keuntungan eksklusif!
+        Silakan isi form pendaftaran berikut untuk menjadi member Foodify.
+        Member Foodify akan mendapatkan informasi promo, rekomendasi menu,
+        dan keuntungan khusus lainnya.
     </p>
 
+    <hr>
+
+    <h3 align="center">Form Pendaftaran Member</h3>
+
     <form action="proses_member.php" method="post">
-
-        <table cellpadding="6" cellspacing="0">
-
+        <table border="1" width="700" align="center" cellpadding="6" cellspacing="0">
             <tr>
-                <td>Nama Lengkap</td>
-                <td>:</td>
+                <th width="180">Nama Lengkap</th>
                 <td>
-                    <input type="text" name="nama" size="30">
+                    <input type="text" name="nama" size="50" required>
                 </td>
             </tr>
 
             <tr>
-                <td>Email</td>
-                <td>:</td>
+                <th>Email</th>
                 <td>
-                    <input type="text" name="email" size="30">
+                    <input type="email" name="email" size="50" required>
                 </td>
             </tr>
 
             <tr>
-                <td>Nomor HP</td>
-                <td>:</td>
+                <th>Nomor HP</th>
                 <td>
-                    <input type="text" name="nohp" size="20">
+                    <input type="text" name="nohp" size="30" required>
                 </td>
             </tr>
 
             <tr>
-                <td>Alamat</td>
-                <td>:</td>
+                <th>Alamat</th>
                 <td>
-                    <textarea name="alamat" rows="3" cols="30"></textarea>
+                    <textarea name="alamat" rows="4" cols="52" required></textarea>
                 </td>
             </tr>
 
             <tr>
-                <td>Jenis Kelamin</td>
-                <td>:</td>
+                <th>Jenis Kelamin</th>
                 <td>
                     <input type="radio" name="jk" value="Laki-laki" checked>
                     Laki-laki
 
-                    &nbsp;
+                    &nbsp;&nbsp;
 
                     <input type="radio" name="jk" value="Perempuan">
                     Perempuan
@@ -67,10 +66,8 @@
             </tr>
 
             <tr>
-                <td>Tanggal Lahir</td>
-                <td>:</td>
+                <th>Tanggal Lahir</th>
                 <td>
-
                     <select name="tgl">
                         <?php for ($i = 1; $i <= 31; $i++): ?>
                             <option value="<?= $i ?>">
@@ -101,34 +98,64 @@
                             </option>
                         <?php endfor; ?>
                     </select>
-
                 </td>
             </tr>
 
             <tr>
-                <td colspan="3">
-                    <input type="checkbox" name="setuju" value="1">
-
-                    Saya menyetujui syarat dan ketentuan
-                    yang berlaku di Foodify
+                <th>Persetujuan</th>
+                <td>
+                    <input type="checkbox" name="setuju" value="1" required>
+                    Saya menyetujui syarat dan ketentuan yang berlaku di Foodify.
                 </td>
             </tr>
 
             <tr>
-                <td colspan="3" align="right">
-
+                <td colspan="2" align="center">
                     <input type="submit" name="daftar" value="Daftar Sekarang">
-
                     &nbsp;
-
                     <input type="reset" value="Reset">
-
                 </td>
             </tr>
-
         </table>
-
     </form>
+
+    <br>
+
+    <h3 align="center">Keuntungan Menjadi Member</h3>
+
+    <table border="1" width="700" align="center" cellpadding="6" cellspacing="0">
+        <tr>
+            <th>No</th>
+            <th>Keuntungan</th>
+            <th>Keterangan</th>
+        </tr>
+
+        <tr align="center">
+            <td>1</td>
+            <td><b>Promo Khusus</b></td>
+            <td align="left">Member mendapatkan informasi promo makanan dan minuman terbaru.</td>
+        </tr>
+
+        <tr align="center">
+            <td>2</td>
+            <td><b>Rekomendasi Menu</b></td>
+            <td align="left">Member bisa mendapatkan rekomendasi menu sesuai kebutuhan.</td>
+        </tr>
+
+        <tr align="center">
+            <td>3</td>
+            <td><b>Layanan Lebih Mudah</b></td>
+            <td align="left">Data member mempermudah proses pemesanan dan pendataan pelanggan.</td>
+        </tr>
+    </table>
+
+    <br>
+
+    <p align="center">
+        <a href="profil.html" target="konten">&larr; Profil</a>
+        &nbsp;
+        <a href="beranda.html" target="konten">Beranda &rarr;</a>
+    </p>
 
 </body>
 
