@@ -11,11 +11,12 @@
     <h2>HALAMAN PENDAFTARAN MEMBER</h2>
     <hr>
 
-    <p>Selamat datang di <b>Foodify</b>!</p>
+    <p>Halo! Selamat datang di halaman pendaftaran <b>Foodify</b>.</p>
     <p>
-        Silakan isi form pendaftaran berikut untuk menjadi member Foodify.
-        Member Foodify akan mendapatkan informasi promo, rekomendasi menu,
-        dan keuntungan khusus lainnya.
+        Daftar sekarang dan jadi bagian dari komunitas Foodify.
+        Member dapat info promo duluan, rekomendasi menu personal,
+        dan pengalaman belanja yang lebih mudah ke depannya.
+        Isi formnya — cuma semenit kok.
     </p>
 
     <hr>
@@ -105,7 +106,7 @@
                 <th>Persetujuan</th>
                 <td>
                     <input type="checkbox" name="setuju" value="1" required>
-                    Saya menyetujui syarat dan ketentuan yang berlaku di Foodify.
+                    Saya setuju sama syarat dan ketentuan yang berlaku di Foodify.
                 </td>
             </tr>
 
@@ -121,7 +122,7 @@
 
     <br>
 
-    <h3 align="center">Keuntungan Menjadi Member</h3>
+    <h3 align="center">Keuntungan Jadi Member Foodify</h3>
 
     <table border="1" width="700" align="center" cellpadding="6" cellspacing="0">
         <tr>
@@ -132,21 +133,22 @@
 
         <tr align="center">
             <td>1</td>
-            <td><b>Promo Khusus</b></td>
-            <td align="left">Member mendapatkan informasi promo makanan dan minuman terbaru.</td>
+            <td><b>Info Promo Duluan</b></td>
+            <td align="left">Member dapet notifikasi promo sebelum diumumin ke publik.</td>
         </tr>
 
         <tr align="center">
             <td>2</td>
-            <td><b>Rekomendasi Menu</b></td>
-            <td align="left">Member bisa mendapatkan rekomendasi menu sesuai kebutuhan.</td>
+            <td><b>Rekomendasi Personal</b></td>
+            <td align="left">Saran menu yang disesuaikan sama preferensi dan riwayat ordermu.</td>
         </tr>
 
         <tr align="center">
             <td>3</td>
-            <td><b>Layanan Lebih Mudah</b></td>
-            <td align="left">Data member mempermudah proses pemesanan dan pendataan pelanggan.</td>
+            <td><b>Proses Order Lebih Cepet</b></td>
+            <td align="left">Data tersimpan, jadi nggak perlu isi ulang info tiap mau pesan.</td>
         </tr>
+        
     </table>
 
     <br>
