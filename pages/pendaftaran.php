@@ -1,3 +1,115 @@
+<?php
+include "../koneksi.php";
+
+function namaBulan($angka) {
+    $bulan = [
+        1 => "Januari",
+        2 => "Februari",
+        3 => "Maret",
+        4 => "April",
+        5 => "Mei",
+        6 => "Juni",
+        7 => "Juli",
+        8 => "Agustus",
+        9 => "September",
+        10 => "Oktober",
+        11 => "November",
+        12 => "Desember"
+    ];
+
+    return $bulan[(int)$angka];
+}
+
+if (isset($_POST['tambah'])) {
+    $nama   = mysqli_real_escape_string($conn, trim($_POST['nama']));
+    $email  = mysqli_real_escape_string($conn, trim($_POST['email']));
+    $nohp   = mysqli_real_escape_string($conn, trim($_POST['nohp']));
+    $alamat = mysqli_real_escape_string($conn, trim($_POST['alamat']));
+    $jk     = mysqli_real_escape_string($conn, $_POST['jk']);
+
+    $tgl = $_POST['tgl'];
+    $bln = $_POST['bln'];
+    $thn = $_POST['thn'];
+
+    $tanggal_lahir = $thn . "-" . $bln . "-" . $tgl;
+
+    $query = "INSERT INTO member 
+              (nama, email, nohp, alamat, jenis_kelamin, tanggal_lahir)
+              VALUES
+              ('$nama', '$email', '$nohp', '$alamat', '$jk', '$tanggal_lahir')";
+
+    if (mysqli_query($conn, $query)) {
+        echo "<script>alert('Member berhasil ditambahkan'); window.location='pendaftaran.php';</script>";
+    } else {
+        echo "<script>alert('Gagal menambahkan member');</script>";
+    }
+}
+
+if (isset($_POST['update'])) {
+    $id_member = mysqli_real_escape_string($conn, $_POST['id_member']);
+    $nama      = mysqli_real_escape_string($conn, trim($_POST['nama']));
+    $email     = mysqli_real_escape_string($conn, trim($_POST['email']));
+    $nohp      = mysqli_real_escape_string($conn, trim($_POST['nohp']));
+    $alamat    = mysqli_real_escape_string($conn, trim($_POST['alamat']));
+    $jk        = mysqli_real_escape_string($conn, $_POST['jk']);
+
+    $tgl = $_POST['tgl'];
+    $bln = $_POST['bln'];
+    $thn = $_POST['thn'];
+
+    $tanggal_lahir = $thn . "-" . $bln . "-" . $tgl;
+
+    $query = "UPDATE member SET
+                nama = '$nama',
+                email = '$email',
+                nohp = '$nohp',
+                alamat = '$alamat',
+                jenis_kelamin = '$jk',
+                tanggal_lahir = '$tanggal_lahir'
+              WHERE id_member = '$id_member'";
+
+    if (mysqli_query($conn, $query)) {
+        echo "<script>alert('Member berhasil diubah'); window.location='pendaftaran.php';</script>";
+    } else {
+        echo "<script>alert('Gagal mengubah member');</script>";
+    }
+}
+
+if (isset($_GET['hapus'])) {
+    $id_member = mysqli_real_escape_string($conn, $_GET['hapus']);
+
+    $query = "DELETE FROM member WHERE id_member = '$id_member'";
+
+    if (mysqli_query($conn, $query)) {
+        echo "<script>alert('Member berhasil dihapus'); window.location='pendaftaran.php';</script>";
+    } else {
+        echo "<script>alert('Gagal menghapus member');</script>";
+    }
+}
+
+$edit_mode = false;
+$data_edit = null;
+
+$tgl_edit = 1;
+$bln_edit = 1;
+$thn_edit = 2000;
+
+if (isset($_GET['edit'])) {
+    $id_member = mysqli_real_escape_string($conn, $_GET['edit']);
+    $query_edit = mysqli_query($conn, "SELECT * FROM member WHERE id_member = '$id_member'");
+
+    if (mysqli_num_rows($query_edit) > 0) {
+        $edit_mode = true;
+        $data_edit = mysqli_fetch_assoc($query_edit);
+
+        $tanggal = explode("-", $data_edit['tanggal_lahir']);
+        $thn_edit = $tanggal[0];
+        $bln_edit = $tanggal[1];
+        $tgl_edit = $tanggal[2];
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="id">
 
@@ -8,119 +120,19 @@
 
 <body bgcolor="lightyellow">
 
-    <h2>HALAMAN PENDAFTARAN MEMBER</h2>
+    <h2 align="center">HALAMAN PENDAFTARAN MEMBER</h2>
     <hr>
 
-    <p>Halo! Selamat datang di halaman pendaftaran <b>Foodify</b>.</p>
-    <p>
-        Daftar sekarang dan jadi bagian dari komunitas Foodify.
-        Member dapat info promo duluan, rekomendasi menu personal,
-        dan pengalaman belanja yang lebih mudah ke depannya.
-        Isi formnya — cuma semenit kok.
+    <p align="center">
+        Halo! Selamat datang di halaman pendaftaran <b>Foodify</b>.
+    </p>
+
+    <p align="center">
+        Yuk daftar jadi member Foodify agar kamu bisa mendapatkan pengalaman yang lebih mudah saat memesan makanan.
+        Dengan menjadi member, data kamu akan tersimpan sehingga proses pemesanan bisa jadi lebih cepat dan praktis.
     </p>
 
     <hr>
-
-    <h3 align="center">Form Pendaftaran Member</h3>
-
-    <form action="proses_member.php" method="post">
-        <table border="1" width="700" align="center" cellpadding="6" cellspacing="0">
-            <tr>
-                <th width="180">Nama Lengkap</th>
-                <td>
-                    <input type="text" name="nama" size="50" required>
-                </td>
-            </tr>
-
-            <tr>
-                <th>Email</th>
-                <td>
-                    <input type="email" name="email" size="50" required>
-                </td>
-            </tr>
-
-            <tr>
-                <th>Nomor HP</th>
-                <td>
-                    <input type="text" name="nohp" size="30" required>
-                </td>
-            </tr>
-
-            <tr>
-                <th>Alamat</th>
-                <td>
-                    <textarea name="alamat" rows="4" cols="52" required></textarea>
-                </td>
-            </tr>
-
-            <tr>
-                <th>Jenis Kelamin</th>
-                <td>
-                    <input type="radio" name="jk" value="Laki-laki" checked>
-                    Laki-laki
-
-                    &nbsp;&nbsp;
-
-                    <input type="radio" name="jk" value="Perempuan">
-                    Perempuan
-                </td>
-            </tr>
-
-            <tr>
-                <th>Tanggal Lahir</th>
-                <td>
-                    <select name="tgl">
-                        <?php for ($i = 1; $i <= 31; $i++): ?>
-                            <option value="<?= $i ?>">
-                                <?= $i ?>
-                            </option>
-                        <?php endfor; ?>
-                    </select>
-
-                    <select name="bln">
-                        <option value="1">Januari</option>
-                        <option value="2">Februari</option>
-                        <option value="3">Maret</option>
-                        <option value="4">April</option>
-                        <option value="5">Mei</option>
-                        <option value="6">Juni</option>
-                        <option value="7">Juli</option>
-                        <option value="8">Agustus</option>
-                        <option value="9">September</option>
-                        <option value="10">Oktober</option>
-                        <option value="11">November</option>
-                        <option value="12">Desember</option>
-                    </select>
-
-                    <select name="thn">
-                        <?php for ($y = 1990; $y <= 2030; $y++): ?>
-                            <option value="<?= $y ?>">
-                                <?= $y ?>
-                            </option>
-                        <?php endfor; ?>
-                    </select>
-                </td>
-            </tr>
-
-            <tr>
-                <th>Persetujuan</th>
-                <td>
-                    <input type="checkbox" name="setuju" value="1" required>
-                    Saya setuju sama syarat dan ketentuan yang berlaku di Foodify.
-                </td>
-            </tr>
-
-            <tr>
-                <td colspan="2" align="center">
-                    <input type="submit" name="daftar" value="Daftar Sekarang">
-                    &nbsp;
-                    <input type="reset" value="Reset">
-                </td>
-            </tr>
-        </table>
-    </form>
-
-    <br>
 
     <h3 align="center">Keuntungan Jadi Member Foodify</h3>
 
@@ -148,7 +160,162 @@
             <td><b>Proses Order Lebih Cepet</b></td>
             <td align="left">Data tersimpan, jadi nggak perlu isi ulang info tiap mau pesan.</td>
         </tr>
-        
+    </table>
+
+    <br>
+
+    <h3 align="center">
+        <?php echo $edit_mode ? "Form Edit Member" : "Form Pendaftaran Member"; ?>
+    </h3>
+
+    <form action="" method="post">
+        <table border="1" width="700" align="center" cellpadding="6" cellspacing="0">
+
+            <?php if ($edit_mode): ?>
+                <input type="hidden" name="id_member" value="<?php echo $data_edit['id_member']; ?>">
+            <?php endif; ?>
+
+            <tr>
+                <th width="180">Nama Lengkap</th>
+                <td>
+                    <input type="text" name="nama" size="50" required
+                           value="<?php echo $edit_mode ? $data_edit['nama'] : ''; ?>">
+                </td>
+            </tr>
+
+            <tr>
+                <th>Email</th>
+                <td>
+                    <input type="email" name="email" size="50" required
+                           value="<?php echo $edit_mode ? $data_edit['email'] : ''; ?>">
+                </td>
+            </tr>
+
+            <tr>
+                <th>Nomor HP</th>
+                <td>
+                    <input type="text" name="nohp" size="30" required
+                           value="<?php echo $edit_mode ? $data_edit['nohp'] : ''; ?>">
+                </td>
+            </tr>
+
+            <tr>
+                <th>Alamat</th>
+                <td>
+                    <textarea name="alamat" rows="4" cols="52" required><?php echo $edit_mode ? $data_edit['alamat'] : ''; ?></textarea>
+                </td>
+            </tr>
+
+            <tr>
+                <th>Jenis Kelamin</th>
+                <td>
+                    <input type="radio" name="jk" value="Laki-laki"
+                        <?php echo (!$edit_mode || $data_edit['jenis_kelamin'] == 'Laki-laki') ? 'checked' : ''; ?>>
+                    Laki-laki
+
+                    &nbsp;&nbsp;
+
+                    <input type="radio" name="jk" value="Perempuan"
+                        <?php echo ($edit_mode && $data_edit['jenis_kelamin'] == 'Perempuan') ? 'checked' : ''; ?>>
+                    Perempuan
+                </td>
+            </tr>
+
+            <tr>
+                <th>Tanggal Lahir</th>
+                <td>
+                    <select name="tgl">
+                        <?php for ($i = 1; $i <= 31; $i++): ?>
+                            <option value="<?php echo $i; ?>" <?php echo ($i == (int)$tgl_edit) ? 'selected' : ''; ?>>
+                                <?php echo $i; ?>
+                            </option>
+                        <?php endfor; ?>
+                    </select>
+
+                    <select name="bln">
+                        <?php for ($i = 1; $i <= 12; $i++): ?>
+                            <option value="<?php echo $i; ?>" <?php echo ($i == (int)$bln_edit) ? 'selected' : ''; ?>>
+                                <?php echo namaBulan($i); ?>
+                            </option>
+                        <?php endfor; ?>
+                    </select>
+
+                    <select name="thn">
+                        <?php for ($y = 1990; $y <= 2030; $y++): ?>
+                            <option value="<?php echo $y; ?>" <?php echo ($y == (int)$thn_edit) ? 'selected' : ''; ?>>
+                                <?php echo $y; ?>
+                            </option>
+                        <?php endfor; ?>
+                    </select>
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="2" align="center">
+                    <?php if ($edit_mode): ?>
+                        <input type="submit" name="update" value="Update Member">
+                        &nbsp;
+                        <a href="pendaftaran.php">Batal</a>
+                    <?php else: ?>
+                        <input type="submit" name="tambah" value="Daftar Member">
+                        &nbsp;
+                        <input type="reset" value="Reset">
+                    <?php endif; ?>
+                </td>
+            </tr>
+        </table>
+    </form>
+
+    <br>
+
+    <hr>
+
+    <h3 align="center">Daftar Member Foodify</h3>
+
+    <table border="1" width="900" align="center" cellpadding="6" cellspacing="0">
+        <tr>
+            <th>No</th>
+            <th>Nama Lengkap</th>
+            <th>Email</th>
+            <th>Nomor HP</th>
+            <th>Alamat</th>
+            <th>Jenis Kelamin</th>
+            <th>Tanggal Lahir</th>
+            <th>Aksi</th>
+        </tr>
+
+        <?php
+        $no = 1;
+        $query_member = mysqli_query($conn, "SELECT * FROM member ORDER BY id_member DESC");
+
+        if (mysqli_num_rows($query_member) > 0) {
+            while ($member = mysqli_fetch_assoc($query_member)) {
+        ?>
+                <tr align="center">
+                    <td><?php echo $no++; ?></td>
+                    <td align="left"><b><?php echo $member['nama']; ?></b></td>
+                    <td><?php echo $member['email']; ?></td>
+                    <td><?php echo $member['nohp']; ?></td>
+                    <td align="left"><?php echo $member['alamat']; ?></td>
+                    <td><?php echo $member['jenis_kelamin']; ?></td>
+                    <td><?php echo $member['tanggal_lahir']; ?></td>
+                    <td>
+                        <a href="pendaftaran.php?edit=<?php echo $member['id_member']; ?>">Edit</a>
+                        |
+                        <a href="pendaftaran.php?hapus=<?php echo $member['id_member']; ?>"
+                           onclick="return confirm('Yakin ingin menghapus member ini?')">
+                            Hapus
+                        </a>
+                    </td>
+                </tr>
+        <?php
+            }
+        } else {
+            echo "<tr>";
+            echo "<td colspan='8' align='center'>Belum ada data member</td>";
+            echo "</tr>";
+        }
+        ?>
     </table>
 
     <br>
