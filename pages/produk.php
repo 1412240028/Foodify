@@ -1,5 +1,5 @@
 <?php
-include "../koneksi.php";
+include "koneksi.php";
 
 $query_produk = mysqli_query($conn, "SELECT * FROM produk ORDER BY id_produk DESC");
 
@@ -8,30 +8,21 @@ function gambarProduk($nama_produk)
     $nama = strtolower($nama_produk);
 
     if (strpos($nama, 'nasi goreng') !== false) {
-        return '../images/nasi-goreng.png';
+        return 'images/nasi-goreng.png';
     } elseif (strpos($nama, 'kopi') !== false) {
-        return '../images/kopi.png';
+        return 'images/kopi.png';
     } elseif (strpos($nama, 'ayam') !== false) {
-        return '../images/ayam-geprek.png';
+        return 'images/ayam-geprek.png';
     } elseif (strpos($nama, 'burger') !== false) {
-        return '../images/burger.png';
+        return 'images/burger.png';
     } elseif (strpos($nama, 'es teh') !== false || strpos($nama, 'teh') !== false) {
-        return '../images/es-teh.png';
+        return 'images/es-teh.png';
     } else {
-        return '../images/default.png';
+        return 'images/default.png';
     }
 }
 ?>
 
-<!DOCTYPE html>
-<html lang="id">
-
-<head>
-    <meta charset="UTF-8">
-    <title>Produk - Foodify</title>
-</head>
-
-<body bgcolor="lightblue">
 
     <h2 align="center">DAFTAR PRODUK FOODIFY</h2>
     <hr>
@@ -157,11 +148,7 @@ function gambarProduk($nama_produk)
     <br>
 
     <p align="center">
-        <a href="kategori.html" target="konten">&larr; Kategori</a>
+        <a href="index.php?page=kategori">&larr; Kategori</a>
         &nbsp;
-        <a href="profil.html" target="konten">Profil &rarr;</a>
+        <a href="index.php?page=profil">Profil &rarr;</a>
     </p>
-
-</body>
-
-</html>

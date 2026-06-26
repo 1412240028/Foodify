@@ -1,5 +1,5 @@
 <?php
-include "../koneksi.php";
+include "koneksi.php";
 
 function namaBulan($angka) {
     $bulan = [
@@ -21,11 +21,11 @@ function namaBulan($angka) {
 }
 
 if (isset($_POST['tambah'])) {
-    $nama   = mysqli_real_escape_string($conn, trim($_POST['nama']));
-    $email  = mysqli_real_escape_string($conn, trim($_POST['email']));
-    $nohp   = mysqli_real_escape_string($conn, trim($_POST['nohp']));
-    $alamat = mysqli_real_escape_string($conn, trim($_POST['alamat']));
-    $jk     = mysqli_real_escape_string($conn, $_POST['jk']);
+    $nama   = trim($_POST['nama']);
+    $email  = trim($_POST['email']);
+    $nohp   = trim($_POST['nohp']);
+    $alamat = trim($_POST['alamat']);
+    $jk     = $_POST['jk'];
 
     $tgl = $_POST['tgl'];
     $bln = $_POST['bln'];
@@ -33,25 +33,24 @@ if (isset($_POST['tambah'])) {
 
     $tanggal_lahir = $thn . "-" . $bln . "-" . $tgl;
 
-    $query = "INSERT INTO member 
-              (nama, email, nohp, alamat, jenis_kelamin, tanggal_lahir)
-              VALUES
-              ('$nama', '$email', '$nohp', '$alamat', '$jk', '$tanggal_lahir')";
+    $stmt = mysqli_prepare($conn, "INSERT INTO member (nama, email, nohp, alamat, jenis_kelamin, tanggal_lahir) VALUES (?, ?, ?, ?, ?, ?)");
+    mysqli_stmt_bind_param($stmt, "ssssss", $nama, $email, $nohp, $alamat, $jk, $tanggal_lahir);
 
-    if (mysqli_query($conn, $query)) {
-        echo "<script>alert('Member berhasil ditambahkan'); window.location='pendaftaran.php';</script>";
+    if (mysqli_stmt_execute($stmt)) {
+        echo "<script>alert('Member berhasil ditambahkan'); window.location='index.php?page=pendaftaran';</script>";
     } else {
         echo "<script>alert('Gagal menambahkan member');</script>";
     }
+    mysqli_stmt_close($stmt);
 }
 
 if (isset($_POST['update'])) {
-    $id_member = mysqli_real_escape_string($conn, $_POST['id_member']);
-    $nama      = mysqli_real_escape_string($conn, trim($_POST['nama']));
-    $email     = mysqli_real_escape_string($conn, trim($_POST['email']));
-    $nohp      = mysqli_real_escape_string($conn, trim($_POST['nohp']));
-    $alamat    = mysqli_real_escape_string($conn, trim($_POST['alamat']));
-    $jk        = mysqli_real_escape_string($conn, $_POST['jk']);
+    $id_member = (int)$_POST['id_member'];
+    $nama      = trim($_POST['nama']);
+    $email     = trim($_POST['email']);
+    $nohp      = trim($_POST['nohp']);
+    $alamat    = trim($_POST['alamat']);
+    $jk        = $_POST['jk'];
 
     $tgl = $_POST['tgl'];
     $bln = $_POST['bln'];
@@ -59,32 +58,29 @@ if (isset($_POST['update'])) {
 
     $tanggal_lahir = $thn . "-" . $bln . "-" . $tgl;
 
-    $query = "UPDATE member SET
-                nama = '$nama',
-                email = '$email',
-                nohp = '$nohp',
-                alamat = '$alamat',
-                jenis_kelamin = '$jk',
-                tanggal_lahir = '$tanggal_lahir'
-              WHERE id_member = '$id_member'";
+    $stmt = mysqli_prepare($conn, "UPDATE member SET nama = ?, email = ?, nohp = ?, alamat = ?, jenis_kelamin = ?, tanggal_lahir = ? WHERE id_member = ?");
+    mysqli_stmt_bind_param($stmt, "ssssssi", $nama, $email, $nohp, $alamat, $jk, $tanggal_lahir, $id_member);
 
-    if (mysqli_query($conn, $query)) {
-        echo "<script>alert('Member berhasil diubah'); window.location='pendaftaran.php';</script>";
+    if (mysqli_stmt_execute($stmt)) {
+        echo "<script>alert('Member berhasil diubah'); window.location='index.php?page=pendaftaran';</script>";
     } else {
         echo "<script>alert('Gagal mengubah member');</script>";
     }
+    mysqli_stmt_close($stmt);
 }
 
 if (isset($_GET['hapus'])) {
-    $id_member = mysqli_real_escape_string($conn, $_GET['hapus']);
+    $id_member = (int)$_GET['hapus'];
 
-    $query = "DELETE FROM member WHERE id_member = '$id_member'";
+    $stmt = mysqli_prepare($conn, "DELETE FROM member WHERE id_member = ?");
+    mysqli_stmt_bind_param($stmt, "i", $id_member);
 
-    if (mysqli_query($conn, $query)) {
-        echo "<script>alert('Member berhasil dihapus'); window.location='pendaftaran.php';</script>";
+    if (mysqli_stmt_execute($stmt)) {
+        echo "<script>alert('Member berhasil dihapus'); window.location='index.php?page=pendaftaran';</script>";
     } else {
         echo "<script>alert('Gagal menghapus member');</script>";
     }
+    mysqli_stmt_close($stmt);
 }
 
 $edit_mode = false;
@@ -95,30 +91,25 @@ $bln_edit = 1;
 $thn_edit = 2000;
 
 if (isset($_GET['edit'])) {
-    $id_member = mysqli_real_escape_string($conn, $_GET['edit']);
-    $query_edit = mysqli_query($conn, "SELECT * FROM member WHERE id_member = '$id_member'");
+    $id_member = (int)$_GET['edit'];
+    $stmt_edit = mysqli_prepare($conn, "SELECT * FROM member WHERE id_member = ?");
+    mysqli_stmt_bind_param($stmt_edit, "i", $id_member);
+    mysqli_stmt_execute($stmt_edit);
+    $result_edit = mysqli_stmt_get_result($stmt_edit);
 
-    if (mysqli_num_rows($query_edit) > 0) {
+    if (mysqli_num_rows($result_edit) > 0) {
         $edit_mode = true;
-        $data_edit = mysqli_fetch_assoc($query_edit);
+        $data_edit = mysqli_fetch_assoc($result_edit);
 
         $tanggal = explode("-", $data_edit['tanggal_lahir']);
         $thn_edit = $tanggal[0];
         $bln_edit = $tanggal[1];
         $tgl_edit = $tanggal[2];
     }
+    mysqli_stmt_close($stmt_edit);
 }
 ?>
 
-<!DOCTYPE html>
-<html lang="id">
-
-<head>
-    <meta charset="UTF-8">
-    <title>Pendaftaran Member - Foodify</title>
-</head>
-
-<body bgcolor="lightyellow">
 
     <h2 align="center">HALAMAN PENDAFTARAN MEMBER</h2>
     <hr>
@@ -255,7 +246,7 @@ if (isset($_GET['edit'])) {
                     <?php if ($edit_mode): ?>
                         <input type="submit" name="update" value="Update Member">
                         &nbsp;
-                        <a href="pendaftaran.php">Batal</a>
+                        <a href="index.php?page=pendaftaran">Batal</a>
                     <?php else: ?>
                         <input type="submit" name="tambah" value="Daftar Member">
                         &nbsp;
@@ -300,9 +291,9 @@ if (isset($_GET['edit'])) {
                     <td><?php echo $member['jenis_kelamin']; ?></td>
                     <td><?php echo $member['tanggal_lahir']; ?></td>
                     <td>
-                        <a href="pendaftaran.php?edit=<?php echo $member['id_member']; ?>">Edit</a>
+                        <a href="index.php?page=pendaftaran&edit=<?php echo $member['id_member']; ?>">Edit</a>
                         |
-                        <a href="pendaftaran.php?hapus=<?php echo $member['id_member']; ?>"
+                        <a href="index.php?page=pendaftaran&hapus=<?php echo $member['id_member']; ?>"
                            onclick="return confirm('Yakin ingin menghapus member ini?')">
                             Hapus
                         </a>
@@ -321,11 +312,7 @@ if (isset($_GET['edit'])) {
     <br>
 
     <p align="center">
-        <a href="profil.html" target="konten">&larr; Profil</a>
+        <a href="index.php?page=profil">&larr; Profil</a>
         &nbsp;
-        <a href="beranda.html" target="konten">Beranda &rarr;</a>
+        <a href="index.php?page=beranda">Beranda &rarr;</a>
     </p>
-
-</body>
-
-</html>
