@@ -1,10 +1,7 @@
 @extends('Foodify.layouts.app')
 
 @section('content')
-    <div class="page-header">
-        <h2>HALAMAN KATEGORI</h2>
-        <hr>
-    </div>
+    <h2 align="center">HALAMAN KATEGORI</h2><hr>
 
     <p>Ini dia semua kategori menu yang ada di <b>Foodify</b>.</p>
     <p>

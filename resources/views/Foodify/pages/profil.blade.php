@@ -1,10 +1,7 @@
 @extends('Foodify.layouts.app')
 
 @section('content')
-    <div class="page-header">
-        <h2>HALAMAN PROFIL</h2>
-        <hr>
-    </div>
+    <h2 align="center">HALAMAN PROFIL</h2><hr>
 
     <p>Kenalan dulu sama <b>FOODIFY</b>!</p>
     <p>

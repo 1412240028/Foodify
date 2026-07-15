@@ -15,28 +15,38 @@ class AdminController extends Controller
         return $this->dashboard();
     }
 
-    public function dashboard(?Product $editingProduct = null, ?Member $editingMember = null)
+    public function dashboard()
+    {
+        return View::make('Admin.dashboard', [
+            'pageBgColor' => 'lightblue',
+        ]);
+    }
+
+    public function products(?Product $editingProduct = null)
     {
         $products = Product::orderBy('id_produk', 'desc')->get();
-        $members = Member::orderBy('id_member', 'desc')->get();
-
-        return View::make('Foodify.admin.dashboard', [
+        
+        return View::make('Admin.products.index', [
             'products' => $products,
-            'members' => $members,
             'editingProduct' => $editingProduct,
+            'pageBgColor' => 'lightblue',
+        ]);
+    }
+
+    public function members(?Member $editingMember = null)
+    {
+        $members = Member::orderBy('id_member', 'desc')->get();
+        
+        return View::make('Admin.members.index', [
+            'members' => $members,
             'editingMember' => $editingMember,
             'pageBgColor' => 'lightblue',
         ]);
     }
 
-    public function products()
-    {
-        return $this->dashboard();
-    }
-
     public function editProduct(Product $product)
     {
-        return $this->dashboard($product);
+        return $this->products($product);
     }
 
     public function storeProduct(Request $request)
@@ -76,7 +86,7 @@ class AdminController extends Controller
 
     public function editMember(Member $member)
     {
-        return $this->dashboard(null, $member);
+        return $this->members($member);
     }
 
     public function storeMember(Request $request)

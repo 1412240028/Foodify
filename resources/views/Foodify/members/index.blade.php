@@ -1,10 +1,7 @@
 @extends('Foodify.layouts.app')
 
 @section('content')
-    <div class="page-header">
-        <h2>HALAMAN PENDAFTARAN MEMBER</h2>
-        <hr>
-    </div>
+    <h2 align="center">HALAMAN PENDAFTARAN MEMBER</h2><hr>
 
     <p>Halo! Selamat datang di halaman pendaftaran <b>Foodify</b>.</p>
     <p>Yuk daftar jadi member Foodify agar kamu bisa mendapatkan pengalaman yang lebih mudah saat memesan makanan.</p>
@@ -45,13 +42,9 @@
         </table>
 
         @if($errors->any())
-            <div class="alert">
-                <ul>
-                    @foreach($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
+            <table width="100%" border="1" cellpadding="8" cellspacing="0" bgcolor="#ffcccc">
+                <tr><td><ul>@foreach($errors->all() as $error)<li>{{ $error }}</li>@endforeach</ul></td></tr>
+            </table><br>
         @endif
     </form>
 
@@ -68,12 +61,12 @@
                 <td>{{ $memberRow->jenis_kelamin }}</td>
                 <td>{{ $memberRow->tanggal_lahir->format('Y-m-d') }}</td>
                 <td>
-                    <a href="{{ route('members.edit', $memberRow) }}">Edit</a>
-                    |
-                    <form action="{{ route('members.destroy', $memberRow) }}" method="post" style="display:inline;">
+                    <a href="{{ route('members.edit', $memberRow) }}">[Edit]</a>
+                    &nbsp;
+                    <form action="{{ route('members.destroy', $memberRow) }}" method="post">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" onclick="return confirm('Yakin ingin menghapus member ini?')">Hapus</button>
+                        <input type="submit" value="[Hapus]" onclick="return confirm('Yakin ingin menghapus member ini?')">
                     </form>
                 </td>
             </tr>

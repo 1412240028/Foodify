@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\PortalController;
@@ -19,14 +20,23 @@ Route::post('/pendaftaran', [MemberController::class, 'store'])->name('members.s
 Route::put('/pendaftaran/{member}', [MemberController::class, 'update'])->name('members.update');
 Route::delete('/pendaftaran/{member}', [MemberController::class, 'destroy'])->name('members.destroy');
 
-Route::get('/admin', [AdminController::class, 'index'])->name('admin.dashboard');
-Route::get('/admin/products', [AdminController::class, 'products'])->name('admin.products');
-Route::get('/admin/products/{product}/edit', [AdminController::class, 'editProduct'])->name('admin.products.edit');
-Route::post('/admin/products', [AdminController::class, 'storeProduct'])->name('admin.products.store');
-Route::put('/admin/products/{product}', [AdminController::class, 'updateProduct'])->name('admin.products.update');
-Route::delete('/admin/products/{product}', [AdminController::class, 'destroyProduct'])->name('admin.products.destroy');
+// Auth Routes
+Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [LoginController::class, 'login']);
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
-Route::get('/admin/members/{member}/edit', [AdminController::class, 'editMember'])->name('admin.members.edit');
-Route::post('/admin/members', [AdminController::class, 'storeMember'])->name('admin.members.store');
-Route::put('/admin/members/{member}', [AdminController::class, 'updateMember'])->name('admin.members.update');
-Route::delete('/admin/members/{member}', [AdminController::class, 'destroyMember'])->name('admin.members.destroy');
+// Admin Routes (Protected)
+Route::middleware('auth')->group(function () {
+    Route::get('/admin', [AdminController::class, 'index'])->name('admin.dashboard');
+    Route::get('/admin/products', [AdminController::class, 'products'])->name('admin.products');
+    Route::get('/admin/products/{product}/edit', [AdminController::class, 'editProduct'])->name('admin.products.edit');
+    Route::post('/admin/products', [AdminController::class, 'storeProduct'])->name('admin.products.store');
+    Route::put('/admin/products/{product}', [AdminController::class, 'updateProduct'])->name('admin.products.update');
+    Route::delete('/admin/products/{product}', [AdminController::class, 'destroyProduct'])->name('admin.products.destroy');
+
+    Route::get('/admin/members', [AdminController::class, 'members'])->name('admin.members');
+    Route::get('/admin/members/{member}/edit', [AdminController::class, 'editMember'])->name('admin.members.edit');
+    Route::post('/admin/members', [AdminController::class, 'storeMember'])->name('admin.members.store');
+    Route::put('/admin/members/{member}', [AdminController::class, 'updateMember'])->name('admin.members.update');
+    Route::delete('/admin/members/{member}', [AdminController::class, 'destroyMember'])->name('admin.members.destroy');
+});

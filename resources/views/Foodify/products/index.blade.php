@@ -1,10 +1,7 @@
 @extends('Foodify.layouts.app')
 
 @section('content')
-    <div class="page-header">
-        <h2>DAFTAR PRODUK FOODIFY</h2>
-        <hr>
-    </div>
+    <h2 align="center">DAFTAR PRODUK FOODIFY</h2><hr>
 
     <p>Temukan berbagai pilihan makanan dan minuman favorit di <b>Foodify</b>.</p>
     <p>Mulai dari makanan berat, snack, sampai minuman segar. Semuanya tersedia untuk menemani aktivitas kamu sehari-hari.</p>

@@ -4,35 +4,63 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Foodify</title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 0; background: #f8fafc; color: #111827; }
-        .topbar { background: #111827; color: white; padding: 16px 24px; display: flex; justify-content: space-between; align-items: center; }
-        .topbar a { color: white; text-decoration: none; margin-left: 12px; font-weight: bold; }
-        .container { padding: 24px; }
-        .card { background: white; border-radius: 12px; padding: 20px; box-shadow: 0 8px 20px rgba(0,0,0,0.06); margin-bottom: 20px; }
-        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
-        th, td { border: 1px solid #e5e7eb; padding: 8px; text-align: left; }
-        th { background: #f3f4f6; }
-        input, textarea, button { font-size: 14px; padding: 8px; }
-        .alert { background: #ecfdf5; border: 1px solid #34d399; padding: 10px; margin-bottom: 12px; border-radius: 8px; }
-        .btn { display: inline-block; padding: 8px 12px; border-radius: 8px; text-decoration: none; background: #111827; color: white; border: none; cursor: pointer; }
-        .btn-secondary { background: #f97316; }
-        form { display: inline; }
-    </style>
 </head>
 <body>
-    <div class="topbar">
-        <strong>Admin Foodify</strong>
-        <div>
-            <a href="{{ url('/admin') }}">Dashboard</a>
-            <a href="{{ url('/') }}">Portal</a>
-        </div>
-    </div>
-    <div class="container">
-        @if(session('status'))
-            <div class="alert">{{ session('status') }}</div>
-        @endif
-        @yield('content')
-    </div>
+    <table width="100%" border="1" cellpadding="8" cellspacing="0">
+        <tr>
+            <td align="center">
+                <h1>ADMIN FOODIFY</h1>
+                <p>Halaman Administrator</p>
+            </td>
+        </tr>
+    </table>
+
+    <table width="100%" border="1" cellpadding="0" cellspacing="0">
+        <tr>
+            <td width="150" valign="top" bgcolor="orange">
+                <table width="100%" border="0" cellpadding="8" cellspacing="0">
+                    <tr><td><a href="{{ url('/admin') }}"><b>Dashboard</b></a></td></tr>
+                    <tr><td><a href="{{ url('/admin/products') }}"><b>Produk</b></a></td></tr>
+                    <tr><td><a href="{{ url('/admin/members') }}"><b>Member</b></a></td></tr>
+                    <tr><td><a href="{{ url('/') }}"><b>Portal Utama</b></a></td></tr>
+                    <tr><td><hr></td></tr>
+                    <tr>
+                        <td>
+                            <a href="{{ route('logout') }}"
+                               onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                <b>Logout</b>
+                            </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                                @csrf
+                            </form>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+            <td valign="top" bgcolor="{{ $pageBgColor ?? 'white' }}">
+                <table width="100%" border="0" cellpadding="10" cellspacing="0">
+                    <tr>
+                        <td>
+                            @if(session('status'))
+                                <table width="100%" border="1" cellpadding="8" cellspacing="0" bgcolor="#e6ffed">
+                                    <tr><td>{{ session('status') }}</td></tr>
+                                </table>
+                                <br>
+                            @endif
+                            @yield('content')
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+
+    <table width="100%" border="1" cellpadding="8" cellspacing="0">
+        <tr>
+            <td align="center">
+                <i>&copy; 2026 Admin Foodify - Food Marketplace</i>
+            </td>
+        </tr>
+    </table>
 </body>
 </html>
