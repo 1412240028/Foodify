@@ -6,7 +6,7 @@
     <p>Temukan berbagai pilihan makanan dan minuman favorit di <b>Foodify</b>.</p>
     <p>Mulai dari makanan berat, snack, sampai minuman segar. Semuanya tersedia untuk menemani aktivitas kamu sehari-hari.</p>
 
-    <table>
+    <table width="100%" border="1" cellpadding="8" cellspacing="0">
         <tr><th>No</th><th>Gambar</th><th>Nama Produk</th><th>Kategori</th><th>Harga</th><th>Deskripsi</th><th>Status</th></tr>
         @forelse($products as $index => $product)
             <tr align="center">
@@ -24,7 +24,7 @@
     </table>
 
     <h3>Kategori Produk</h3>
-    <table>
+    <table width="100%" border="1" cellpadding="8" cellspacing="0">
         <tr><th>No</th><th>Kategori</th><th>Keterangan</th></tr>
         <tr align="center"><td>1</td><td><b>Makanan Berat</b></td><td align="left">Menu utama yang cocok untuk makan siang atau makan malam.</td></tr>
         <tr align="center"><td>2</td><td><b>Snack</b></td><td align="left">Cemilan santai buat nemenin ngobrol, belajar, atau nonton.</td></tr>

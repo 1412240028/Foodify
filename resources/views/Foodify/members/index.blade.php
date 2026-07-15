@@ -7,7 +7,7 @@
     <p>Yuk daftar jadi member Foodify agar kamu bisa mendapatkan pengalaman yang lebih mudah saat memesan makanan.</p>
 
     <h3>Keuntungan Jadi Member Foodify</h3>
-    <table>
+    <table width="100%" border="1" cellpadding="8" cellspacing="0">
         <tr><th>No</th><th>Keuntungan</th><th>Keterangan</th></tr>
         <tr align="center"><td>1</td><td><b>Info Promo Duluan</b></td><td align="left">Member dapet notifikasi promo sebelum diumumin ke publik.</td></tr>
         <tr align="center"><td>2</td><td><b>Rekomendasi Personal</b></td><td align="left">Saran menu yang disesuaikan sama preferensi dan riwayat ordermu.</td></tr>
@@ -21,7 +21,7 @@
             @method('PUT')
         @endif
 
-        <table>
+        <table width="100%" border="1" cellpadding="8" cellspacing="0">
             @if(isset($editMode))
                 <input type="hidden" name="id" value="{{ $member->id }}">
             @endif
@@ -49,7 +49,7 @@
     </form>
 
     <h3>Daftar Member Foodify</h3>
-    <table>
+    <table width="100%" border="1" cellpadding="8" cellspacing="0">
         <tr><th>No</th><th>Nama Lengkap</th><th>Email</th><th>Nomor HP</th><th>Alamat</th><th>Jenis Kelamin</th><th>Tanggal Lahir</th><th>Aksi</th></tr>
         @forelse($members as $index => $memberRow)
             <tr align="center">

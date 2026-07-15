@@ -13,7 +13,7 @@
     <hr>
 
     <h3>PROFIL FOODIFY</h3>
-    <table>
+    <table width="100%" border="1" cellpadding="8" cellspacing="0">
         <tr><th>NAMA</th><td>Foodify</td></tr>
         <tr><th>JENIS LAYANAN</th><td>Platform Penjualan Makanan & Minuman Online</td></tr>
         <tr><th>BERDIRI SEJAK</th><td>2024</td></tr>
@@ -24,7 +24,7 @@
     </table>
 
     <h3>FITUR FOODIFY</h3>
-    <table>
+    <table width="100%" border="1" cellpadding="8" cellspacing="0">
         <tr><th>NO.</th><th>FITUR</th><th>KETERANGAN</th></tr>
         <tr><td>1</td><td><b>BERANDA</b></td><td>Menampilkan promo, rekomendasi menu, dan informasi utama dari Foodify.</td></tr>
         <tr><td>2</td><td><b>KATEGORI</b></td><td>Membantu pengguna menemukan menu berdasarkan jenis makanan atau minuman.</td></tr>
