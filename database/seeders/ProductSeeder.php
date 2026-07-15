@@ -42,6 +42,14 @@ class ProductSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
+            [
+                'nama_produk' => 'Ayam Geprek',
+                'kategori' => 'Makanan Berat',
+                'harga' => 18000,
+                'deskripsi' => 'Ayam geprek pedas nampol dengan nasi hangat',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
         ]);
     }
 }

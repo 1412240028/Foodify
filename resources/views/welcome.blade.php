@@ -49,5 +49,34 @@
             </td>
         </tr>
     </table>
+    <br><br>
+    <table align="center" width="800" border="1" cellpadding="10" cellspacing="0" bgcolor="#ffffff" bordercolor="#cccccc">
+        <tr>
+            <td colspan="2" bgcolor="#111827" align="center">
+                <font color="#ffffff" face="Arial, sans-serif"><b>DATA MAHASISWA</b></font>
+            </td>
+        </tr>
+        <tr>
+            <td width="30%" bgcolor="#fffaf5"><font face="Arial, sans-serif" color="#4b5563"><b>Nama</b></font></td>
+            <td><font face="Arial, sans-serif" color="#111827">Dhoni Prasetya</font></td>
+        </tr>
+        <tr>
+            <td bgcolor="#fffaf5"><font face="Arial, sans-serif" color="#4b5563"><b>NPM</b></font></td>
+            <td><font face="Arial, sans-serif" color="#111827">1412240028</font></td>
+        </tr>
+        <tr>
+            <td bgcolor="#fffaf5"><font face="Arial, sans-serif" color="#4b5563"><b>Kelas</b></font></td>
+            <td><font face="Arial, sans-serif" color="#111827">TIF 24 B</font></td>
+        </tr>
+        <tr>
+            <td bgcolor="#fffaf5"><font face="Arial, sans-serif" color="#4b5563"><b>Dosen Pengampu</b></font></td>
+            <td><font face="Arial, sans-serif" color="#111827">Asfan Muqtadir, S.Kom., M.Kom</font></td>
+        </tr>
+        <tr>
+            <td bgcolor="#fffaf5"><font face="Arial, sans-serif" color="#4b5563"><b>Mata Kuliah</b></font></td>
+            <td><font face="Arial, sans-serif" color="#111827">Pemrograman Web</font></td>
+        </tr>
+    </table>
+    <br><br>
 </body>
 </html>
