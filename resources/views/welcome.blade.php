@@ -38,7 +38,7 @@
                             <table border="0" cellpadding="15" cellspacing="0" bgcolor="#111827">
                                 <tr>
                                     <td align="center">
-                                        <a href="{{ route('login') }}"><font color="#ffffff" face="Arial, sans-serif"><b>Buka Admin</b></font></a>
+                                        <a href="{{ url('/admin') }}"><font color="#ffffff" face="Arial, sans-serif"><b>Buka Admin</b></font></a>
                                     </td>
                                 </tr>
                             </table>

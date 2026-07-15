@@ -26,17 +26,6 @@
                     <tr><td><a href="{{ url('/admin/members') }}" style="text-decoration: none;"><font color="#ffffff" face="Arial, sans-serif"><b>Member</b></font></a></td></tr>
                     <tr><td><a href="{{ url('/') }}" style="text-decoration: none;"><font color="#ffffff" face="Arial, sans-serif"><b>Portal Utama</b></font></a></td></tr>
                     <tr><td><hr color="#4b5563"></td></tr>
-                    <tr>
-                        <td>
-                            <a href="{{ route('logout') }}" style="text-decoration: none;"
-                               onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                <font color="#f87171" face="Arial, sans-serif"><b>Logout</b></font>
-                            </a>
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                @csrf
-                            </form>
-                        </td>
-                    </tr>
                 </table>
             </td>
             <td valign="top" bgcolor="{{ $pageBgColor ?? '#ffffff' }}">

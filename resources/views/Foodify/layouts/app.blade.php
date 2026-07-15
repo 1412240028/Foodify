@@ -30,7 +30,7 @@
                     <tr><td><a href="{{ url('/pendaftaran') }}" style="text-decoration:none;"><font color="#ffffff" face="Arial, sans-serif"><b>Pendaftaran</b></font></a></td></tr>
                     <tr><td><hr color="#4b5563"></td></tr>
                     <tr><td><a href="{{ url('/') }}" style="text-decoration:none;"><font color="#ffffff" face="Arial, sans-serif"><b>Portal Utama</b></font></a></td></tr>
-                    <tr><td><a href="{{ route('login') }}" style="text-decoration:none;"><font color="#f87171" face="Arial, sans-serif"><b>Login Admin</b></font></a></td></tr>
+
                 </table>
             </td>
             
